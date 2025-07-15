@@ -1,0 +1,175 @@
+<div class="ocean-wave"></div>
+<!-- Cartoon Bubbles -->
+<div class="bubble-ocean bubble1"></div>
+<div class="bubble-ocean bubble2"></div>
+<div class="bubble-ocean bubble3"></div>
+<div class="bubble-ocean bubble4"></div>
+<div class="bubble-ocean bubble5"></div>
+
+<div class="chat-container">
+  <!-- Sidebar: Friend List -->
+  <div class="friend-list">
+    <h4>🐚 Chats</h4>
+    <div
+      class="friend"
+      *ngFor="let user of loadUsersReturned"
+      (click)="selectUser(user)"
+    >
+      <div *ngIf="user.userName != currentUserName">
+        <div class="avatar">🌊</div>
+        <div class="username">
+          {{ user.userName }}
+        </div>
+      </div>
+    </div>
+    <button class="refresh-btn" (click)="loadUsers()">🔄 Refresh</button>
+    <div *ngIf="loadUsersErrors" class="error">{{ loadUsersErrors }}</div>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="chat-section">
+    <!-- Top User Info Bar -->
+    <div class="chat-header">
+      <div class="chat-avatar">🐠</div>
+      <div class="chat-details">
+        <strong>{{ receiverName || "Select a friend!" }}</strong>
+      </div>
+      <div class="chat-actions">
+        <span class="icon" title="Video Call" (click)="startVideoCall()"
+          >📹</span
+        >
+        <!-- Video Chat Modal/Component -->
+        <app-video-chat
+          *ngIf="showVideoChat"
+          [remoteUserId]="receiverId"
+          (close)="closeVideoChat()"
+        ></app-video-chat>
+        <span class="icon" title="Info">ℹ️</span>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="message-list">
+      <div *ngFor="let msg of messages" class="message-container">
+        <div
+          [ngClass]="{
+            'message other': msg.senderId !== currentUserId,
+            'message user': msg.senderId === currentUserId
+          }"
+        >
+          <p>{{ msg.content }}</p>
+          <small>{{ msg.timeStamp | date : "short" }}</small>
+        </div>
+      </div>
+      <!-- <button class="load-btn" (click)="loadMessages()">🔄 Load More</button> -->
+    </div>
+
+    <!-- Message Input -->
+    <div class="message-form">
+      <input
+        type="text"
+        [(ngModel)]="messageContent"
+        placeholder="Type a message..."
+      />
+      <button (click)="sendMessage()">🐬 Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Top Navbar for Search/Profile/Notifications -->
+<div class="layout">
+  <div class="navbar">
+    <div class="navbar-actions">
+      <button class="profile-btn" (click)="seeProfile()" title="See Profile">
+        🧑‍🚀
+      </button>
+      <input
+        class="search-input"
+        type="text"
+        [(ngModel)]="searchedName"
+        placeholder="Search user..."
+      />
+      <button class="search-btn" (click)="searchUser()">🔍</button>
+      <button
+        class="notif-btn"
+        (click)="seeNotification()"
+        title="Notifications"
+      >
+        🔔
+      </button>
+    </div>
+    <div *ngIf="searchError">
+      <p style="color: red">{{ searchError }}</p>
+    </div>
+    <div *ngIf="searchReturned">
+      <p>
+        <span>🧑‍💻 UserName: {{ searchReturned.searchedUserName }}</span> <br />
+        <span>🆔 {{ searchReturned.searchedUserId }}</span
+        ><br />
+        <span>👥 No Of Friends: {{ searchReturned.searchedNoOfFriends }}</span>
+      </p>
+      <button (click)="sendRequest(searchReturned.searchedUserId)">
+        🤝 Send Request
+      </button>
+      <button (click)="initiateMessagebool = true">Message</button>
+      <div *ngIf="initiateMessagebool">
+        <input
+          type="text"
+          [(ngModel)]="initiateMessageContent"
+          placeholder="Type your message..."
+        />
+        <button (click)="initiateMessage()">Send Message</button>
+        <div *ngIf="RequestReturned">
+          <p>Requester: {{ RequestReturned.RequesterId }}</p>
+          <p>Request To: {{ RequestReturned.RequestToId }}</p>
+          <p>Status: {{ RequestReturned.RequestStatus }}</p>
+          <p>Time: {{ RequestReturned.RequestTime }}</p>
+        </div>
+        <div *ngIf="RequestReturnedError">
+          <p style="color: red">{{ RequestReturnedError }}</p>
+        </div>
+      </div>
+      <div *ngIf="profileReturned">
+        <span>🧑‍🚀 username: {{ profileReturned.userName }}</span> <br />
+        <span>🆔 userid: {{ profileReturned.userId }}</span> <br />
+        <span>👥 userfriends: {{ profileReturned.numOfFriends }}</span>
+      </div>
+    </div>
+    <div class="main">
+      <div class="sidebar">
+        <!-- Notification List -->
+        <div *ngIf="NotificationReturned">
+          <div
+            *ngFor="let noti of NotificationReturned"
+            class="notification-item"
+          >
+            <span
+              >🧑‍🚀 {{ noti.requesterId }} <br />{{ noti.requesterName }}</span
+            >
+            →
+            <span>🧑‍🚀 {{ noti.requestToId }}<br />{{ noti.requesterName }}</span>
+            <br />
+            <span>⏰ {{ noti.requestTime | date : "short" }}</span> -
+            <span>Status: {{ noti.requestStatus }}</span>
+            <button
+              *ngIf="noti.requestToId == currentUserId"
+              (click)="acceptrequest(noti.requesterId, true)"
+            >
+              ✅ Accept
+            </button>
+            <div *ngIf="acceptReturned">
+              {{ acceptReturned }}
+            </div>
+            <div *ngIf="acceptReturnedError">
+              {{ acceptReturnedError }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="NotificationReturnedError">
+          <p style="color: red">{{ NotificationReturnedError }}</p>
+        </div>
+      </div>
+      <div class="content"></div>
+    </div>
+  </div>
+</div>

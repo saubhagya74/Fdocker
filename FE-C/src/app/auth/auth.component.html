@@ -1,0 +1,61 @@
+<div class="auth-container">
+  <div class="auth-slider-box" [class.show-register]="!showLogin">
+    <div class="auth-photo">
+      <img
+        src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        alt="Welcome"
+      />
+    </div>
+    <div class="auth-form-panel login-panel">
+      <h2>Login</h2>
+      <form (ngSubmit)="login()">
+        <input
+          type="text"
+          [(ngModel)]="user.userName"
+          name="loginUsername"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          name="loginPassword"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Login</button>
+        <p *ngIf="error && showLogin" class="error">{{ error }}</p>
+      </form>
+      <div class="switch-link">
+        <span>Don't have an account?</span>
+        <button type="button" (click)="showLogin = false">Register</button>
+      </div>
+    </div>
+    <div class="auth-form-panel register-panel">
+      <h2>Register</h2>
+      <form (ngSubmit)="register()">
+        <input
+          type="text"
+          [(ngModel)]="user.userName"
+          name="registerUsername"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          name="registerPassword"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Register</button>
+        <p *ngIf="success && !showLogin" class="success">{{ success }}</p>
+        <p *ngIf="error && !showLogin" class="error">{{ error }}</p>
+      </form>
+      <div class="switch-link">
+        <span>Already have an account?</span>
+        <button type="button" (click)="showLogin = true">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

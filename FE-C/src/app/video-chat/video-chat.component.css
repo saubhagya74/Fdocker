@@ -1,0 +1,54 @@
+/* Basic modal styling for video chat */
+.video-chat-modal {
+  background: #e0f7fa;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px #6fd6ff33;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video-chat-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.video-chat-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.video-el {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  background: #b2eaff;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  box-shadow: 0 2px 8px #6fd6ff33;
+}
+.video-chat-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.video-chat-actions button {
+  background: #6fd6ff;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.7rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.video-chat-actions button:hover {
+  background: #3e8ecf;
+}

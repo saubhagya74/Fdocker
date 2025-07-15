@@ -1,0 +1,15 @@
+<div class="video-chat-modal">
+  <div class="video-chat-header">
+    <span>Video Call</span>
+    <button (click)="endCall()">End Call</button>
+  </div>
+  <div class="video-chat-body">
+    <video #localVideo autoplay muted playsinline class="video-el"></video>
+    <video #remoteVideo autoplay playsinline class="video-el"></video>
+  </div>
+  <div class="video-chat-actions">
+    <button (click)="startCall()">Start Call</button>
+    <button (click)="acceptCall()">Accept</button>
+    <button (click)="declineCall()">Decline</button>
+  </div>
+</div>

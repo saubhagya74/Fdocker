@@ -1,0 +1,20 @@
+# ASP.NET build output
+app/bin/
+app/obj/
+app/.vs/
+
+# Angular build output
+FE-C/dist/
+FE-C/.angular/
+FE-C/node_modules/
+FE-C/package-lock.json
+
+# Docker artifacts
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code (optional)
+.vscode/

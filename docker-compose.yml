@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: poplm10@
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    image: my-backend-image
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DatabaseConnection=Host=db;Port=5432;Database=app;Username=postgres;Password=poplm10@
+    ports:
+      - "5000:80"
+
+volumes:
+  pgdata:
