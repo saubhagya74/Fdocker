@@ -104,7 +104,11 @@ using (var scope = app.Services.CreateScope())
                 app.MapScalarApiReference();
             }
 
-            app.UseHttpsRedirection();
+            if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 
             app.UseRouting(); //  Required before CORS/Auth
 
