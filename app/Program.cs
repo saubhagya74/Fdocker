@@ -75,11 +75,7 @@ namespace app
             {
                 options.AddPolicy("AllowAngularDevClient", policy =>
                 {
-                    policy.WithOrigins(  "http://localhost:4200",
-    "http://192.168.206.1:4200",
-    "http://192.168.1.66:4200",
-    "http://192.168.100.1:4200",
-    "https://your-aws-frontend-domain-or-ip"  )
+                    policy.WithOrigins(  "http://awsip:4200")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials(); // needed for cookies or SignalR
