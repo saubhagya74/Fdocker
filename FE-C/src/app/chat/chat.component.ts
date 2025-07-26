@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
+import { environment } from '../../env';
 
 interface MessageDto {
   senderId: string;
