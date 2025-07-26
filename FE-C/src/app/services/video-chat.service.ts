@@ -12,7 +12,7 @@ export class VideoChatService {
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
-  private hubUrl = 'http://localhost:5000/VideoChatHub';
+  private hubUrl = `${environment.API_BASE_URL}/VideoChatHub`;
   public hubConnection!: HubConnection;
 
   public incomingCall = false;

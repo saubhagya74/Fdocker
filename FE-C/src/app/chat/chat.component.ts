@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
       ];
 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/ChatHub', {
+      .withUrl(`${environment.API_BASE_URL}/ChatHub`, {
         accessTokenFactory: () => token,
       })
       .withAutomaticReconnect({
@@ -91,7 +91,7 @@ export class ChatComponent implements OnInit {
     const headers = this.getAuthHeaders();
     this.http
       .get<{ userName: string; userId: string }[]>(
-        `http://localhost:5000/Chat/loadusers`,
+        `${environment.API_BASE_URL}/Chat/loadusers`,
         { headers }
       )
       .subscribe({
@@ -167,7 +167,7 @@ export class ChatComponent implements OnInit {
 
     this.http
       .get<MessageDto[]>(
-        `http://localhost:5000/Chat/loadmessage/${this.receiverId}`,
+        `${environment.API_BASE_URL}/Chat/loadmessage/${this.receiverId}`,
         { headers }
       )
       .subscribe({
@@ -249,7 +249,7 @@ export class ChatComponent implements OnInit {
   searchUser() {
     const headers = this.getAuthHeaders();
     this.http
-      .get(`http://localhost:5000/chat/searchUser/${this.searchedName}`, {
+      .get(`${environment.API_BASE_URL}/chat/searchUser/${this.searchedName}`, {
         headers,
       })
       .subscribe({
@@ -270,7 +270,7 @@ export class ChatComponent implements OnInit {
     console.log('you cliked see profile button');
     const headers = this.getAuthHeaders();
     this.http
-      .get(`http://localhost:5000/chat/seeprofile`, { headers })
+      .get(`${environment.API_BASE_URL}/chat/seeprofile`, { headers })
       .subscribe({
         next: (data) => {
           this.profileReturned = data;
@@ -290,7 +290,7 @@ export class ChatComponent implements OnInit {
     const headers = this.getAuthHeaders();
     console.log('you clikced send request');
     this.http
-      .get(`http://localhost:5000/chat/sendrequest/${requesttoid}`, {
+      .get(`${environment.API_BASE_URL}/chat/sendrequest/${requesttoid}`, {
         headers,
       })
       .subscribe({
@@ -311,7 +311,9 @@ export class ChatComponent implements OnInit {
     console.log('you pressed notification button');
     const headers = this.getAuthHeaders();
     this.http
-      .get<any[]>(`http://localhost:5000/chat/seenotification`, { headers })
+      .get<any[]>(`${environment.API_BASE_URL}/chat/seenotification`, {
+        headers,
+      })
       .subscribe({
         next: (data) => {
           this.NotificationReturned = data;
@@ -330,7 +332,7 @@ export class ChatComponent implements OnInit {
     const headers = this.getAuthHeaders();
     this.http
       .get(
-        `http://localhost:5000/chat/acceptordeclinerequest/${accpettoid}/${statuschange}`,
+        `${environment.API_BASE_URL}/chat/acceptordeclinerequest/${accpettoid}/${statuschange}`,
         { headers }
       )
       .subscribe({

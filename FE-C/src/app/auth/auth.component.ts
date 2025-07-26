@@ -50,13 +50,16 @@ export class AuthService {
 
   login(user: UserDto): Observable<TokenResponseDto> {
     return this.http.post<TokenResponseDto>(
-      `http://localhost:5000/api/Auth/login`,
+      `${environment.API_BASE_URL}/api/Auth/login`,
       user
     );
   }
 
   register(user: UserDto): Observable<any> {
-    return this.http.post(`http://localhost:5000/api/Auth/register`, user);
+    return this.http.post(
+      `${environment.API_BASE_URL}/api/Auth/register`,
+      user
+    );
   }
 }
 
