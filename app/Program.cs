@@ -75,7 +75,7 @@ namespace app
             {
                 options.AddPolicy("AllowAngularDevClient", policy =>
                 {
-                    policy.WithOrigins(  "http://52.4.154.95")
+                    policy.WithOrigins(  "http://52.86.249.52")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials(); // needed for cookies or SignalR
