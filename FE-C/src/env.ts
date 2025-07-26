@@ -1,1 +1,4 @@
-export const API_BASE_URL = 'https://your-current-aws-sandbox-url.com:5000';
+export const environment = {
+  production: true,
+  API_BASE_URL: 'http://52.4.154.95:5000'
+};
